@@ -32,7 +32,7 @@ class Generator:
 
 	"""
     Fetches the average brightness value of a single pixel based on RGB values, and then assigns it to its corresponding pixel position in the array.
-    Formula: (R+G+B)/3 (duh)
+    Formula: .33 * R + .5 * G + .16 * B
     """
 	def _get_average(self, im_array):
 		for x in range(0, im_array.shape[0]):
@@ -40,9 +40,10 @@ class Generator:
 				pixel = im_array[x][y]
 				temp_rgb = 0
 				for z in pixel:
-					temp_rgb += z 
-				average = temp_rgb/3
-				im_array[x][y] = average 
+					temp_rgb = 0.33 * pixel[0]
+					temp_rgb += 0.5 * pixel[1]
+					temp_rgb += 0.16 * pixel[2]
+				im_array[x][y] = temp_rgb
 		return im_array
 		"""
     	The _ASCII_LIST constant is a list with crescent brightness-ascii character correspondence. 
